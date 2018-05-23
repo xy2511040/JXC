@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 
-import lombok.Data;
 
 
 /**
@@ -17,7 +16,6 @@ import lombok.Data;
  */
 @Entity
 @Table(name="t_menu")
-@Data
 public class Menu {
 	
 	@Id
@@ -37,4 +35,53 @@ public class Menu {
 	
 	private Integer pId; // 父菜单Id
 
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public Integer getpId() {
+		return pId;
+	}
+
+	public void setpId(Integer pId) {
+		this.pId = pId;
+	}
+
+	
 }

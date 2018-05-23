@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 
-import lombok.Data;
 
 
 /**
@@ -17,7 +16,6 @@ import lombok.Data;
  */
 @Entity
 @Table(name="t_role")
-@Data
 public class Role {
 	
 	@Id
@@ -29,4 +27,30 @@ public class Role {
 	
 	@Column(length=1000)
 	private String remarks; //备注
+
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	
+	
 }
