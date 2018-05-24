@@ -23,7 +23,7 @@ public class Menu {
 	private Integer Id;	//自增Id
 	
 	@Column(length=50)
-	private String menuName; //菜单名
+	private String name; //菜单名
 	
 	@Column(length=200)
 	private String url; //菜单地址
@@ -43,12 +43,12 @@ public class Menu {
 		Id = id;
 	}
 
-	public String getMenuName() {
-		return menuName;
+	public String getName() {
+		return name;
 	}
 
-	public void setMenuName(String menuName) {
-		this.menuName = menuName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUrl() {

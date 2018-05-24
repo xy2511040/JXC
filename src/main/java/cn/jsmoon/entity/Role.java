@@ -23,7 +23,7 @@ public class Role {
 	private Integer Id;	//自增Id
 	
 	@Column(length=50)
-	private String roleName; //角色名
+	private String name; //角色名
 	
 	@Column(length=1000)
 	private String remarks; //备注
@@ -36,12 +36,12 @@ public class Role {
 		Id = id;
 	}
 
-	public String getRoleName() {
-		return roleName;
+	public String getName() {
+		return name;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getRemarks() {
