@@ -1,6 +1,7 @@
 package cn.jsmoon.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import cn.jsmoon.entity.User;
@@ -10,7 +11,7 @@ import cn.jsmoon.entity.User;
  * @author LTQ
  *
  */
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface UserRepository extends JpaRepository<User, Integer>,JpaSpecificationExecutor<User>{
 
 	/**
 	 * 根据用户名查找用户实体

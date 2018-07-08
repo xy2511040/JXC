@@ -124,7 +124,7 @@ public class UserController {
 	public String loadUserInfo(HttpSession session)throws Exception{
 		User currentUser=(User) session.getAttribute("currentUser");
 		Role currentRole=(Role) session.getAttribute("currentRole");
-		return "欢迎您："+currentUser.getTrueName()+"&nbsp;[&nbsp;"+currentRole.getName()+"&nbsp;]";
+		return "欢迎您："+currentUser.getTrueName()+"&nbsp;【&nbsp;"+currentRole.getName()+"&nbsp;】";
 	}
 	
 	/**

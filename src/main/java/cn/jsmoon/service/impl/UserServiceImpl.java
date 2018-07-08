@@ -1,12 +1,24 @@
 package cn.jsmoon.service.impl;
 
-import javax.annotation.Resource;
+import java.util.List;
 
+import javax.annotation.Resource;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import cn.jsmoon.entity.User;
 import cn.jsmoon.repository.UserRepository;
 import cn.jsmoon.service.UserService;
+import cn.jsmoon.util.StringUtil;
 
 /**
  * 用户Service实现类
@@ -22,6 +34,48 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User findByUserName(String userName) {
 		return userRepository.findByUserName(userName);
+	}
+
+	@Override
+	public List<User> list(User user, Integer page, Integer pageSize, Direction direction, String... properties) {
+		Pageable pageable = PageRequest.of(page-1, pageSize);
+		//PageRequest pageRequest = new PageRequest(page-1, pageSize);
+		//Pageable pageable = new PageRequest(page-1, pageSize);
+		Page<User> pageUser=userRepository.findAll(new Specification<User>() {
+
+			@Override
+			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				Predicate predicate=cb.conjunction();
+				if(user!=null) {
+					if(StringUtil.isNotEmpty(user.getUserName())) {
+						predicate.getExpressions().add(cb.like(root.get("userName"), "%"+user.getUserName()+"%"));
+					}
+					predicate.getExpressions().add(cb.notEqual(root.get("id"), 1));
+				}
+				return predicate;
+			}
+		}, pageable);
+		
+		return pageUser.getContent();
+	}
+
+	@Override
+	public Long getCount(User user) {
+		Long count=userRepository.count(new Specification<User>() {
+
+			@Override
+			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				Predicate predicate=cb.conjunction();
+				if(user!=null) {
+					if(StringUtil.isNotEmpty(user.getUserName())) {
+						predicate.getExpressions().add(cb.like(root.get("userName"), "%"+user.getUserName()+"%"));
+					}
+					predicate.getExpressions().add(cb.notEqual(root.get("id"), 1));
+				}
+				return predicate;
+			}
+		});
+		return count;
 	}
 
 }

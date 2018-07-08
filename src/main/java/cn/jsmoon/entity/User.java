@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.persistence.Id;
 
@@ -21,7 +22,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Id;	//自增Id
+	private Integer id;	//自增Id
 	
 	@NotEmpty(message="请输入用户名！")
 	@Column(length=50)
@@ -36,13 +37,16 @@ public class User {
 	
 	@Column(length=1000)
 	private String remarks; //备注
+	
+	@Transient
+	private String roles; //用户所拥有的角色，不映射到数据库
 
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Integer id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getUserName() {
@@ -77,5 +81,12 @@ public class User {
 		this.remarks = remarks;
 	}
 	
-	
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
 }
